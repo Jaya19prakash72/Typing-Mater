@@ -1,0 +1,2356 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Typing Master - Typing Speed Test</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #222;
+    padding: 20px;
+}
+
+body.dark {
+    background: linear-gradient(135deg, #111827, #1e293b);
+    color: white;
+}
+
+.container {
+    max-width: 1050px;
+    margin: auto;
+}
+
+/* ================= LOGIN ================= */
+
+.login-screen {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 450px;
+    background: white;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.25);
+    text-align: center;
+}
+
+body.dark .login-box {
+    background: #1e293b;
+    color: white;
+}
+
+.login-logo {
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+
+.login-box h1 {
+    margin-bottom: 8px;
+}
+
+.login-box p {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+body.dark .login-box p {
+    color: #aaa;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: #667eea;
+}
+
+body.dark .input-group input {
+    background: #0f172a;
+    color: white;
+    border-color: #475569;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #667eea;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background: #5568d9;
+}
+
+.login-message {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #dc2626;
+}
+
+/* ================= MAIN ================= */
+
+.main-screen {
+    display: none;
+}
+
+.card {
+    background: white;
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.25);
+}
+
+body.dark .card {
+    background: #1e293b;
+}
+
+/* ================= HEADER ================= */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 30px;
+}
+
+.header p {
+    color: #777;
+    margin-top: 5px;
+}
+
+body.dark .header p {
+    color: #aaa;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-btn {
+    border: none;
+    background: #eee;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+body.dark .icon-btn {
+    background: #334155;
+    color: white;
+}
+
+/* ================= USER ================= */
+
+.user-bar {
+    background: #f5f6ff;
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body.dark .user-bar {
+    background: #334155;
+}
+
+.username {
+    font-weight: bold;
+    color: #667eea;
+}
+
+/* ================= LEVELS ================= */
+
+.level-title {
+    margin-bottom: 12px;
+}
+
+.levels {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.level-btn {
+    padding: 15px 5px;
+    border: 2px solid #ddd;
+    background: white;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.level-btn:hover {
+    border-color: #667eea;
+}
+
+.level-btn.active {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+.level-btn.locked {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+body.dark .level-btn {
+    background: #334155;
+    color: white;
+    border-color: #475569;
+}
+
+body.dark .level-btn.active {
+    background: #667eea;
+}
+
+/* ================= STATS ================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat {
+    background: #f5f6ff;
+    padding: 18px;
+    text-align: center;
+    border-radius: 14px;
+}
+
+body.dark .stat {
+    background: #334155;
+}
+
+.stat h3 {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 8px;
+}
+
+body.dark .stat h3 {
+    color: #bbb;
+}
+
+.stat p {
+    color: #667eea;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+/* ================= PROGRESS ================= */
+
+.progress-container {
+    height: 9px;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: #667eea;
+}
+
+/* ================= SENTENCE ================= */
+
+.sentence-box {
+    background: #f8f9ff;
+    padding: 25px;
+    border-radius: 15px;
+    min-height: 150px;
+    line-height: 1.8;
+    font-size: 21px;
+    margin-bottom: 20px;
+}
+
+body.dark .sentence-box {
+    background: #334155;
+}
+
+.char.correct {
+    color: #16a34a;
+}
+
+.char.wrong {
+    color: #dc2626;
+    background: #fee2e2;
+}
+
+.char.current {
+    border-left: 2px solid #667eea;
+}
+
+/* ================= TEXTAREA ================= */
+
+textarea {
+    width: 100%;
+    height: 160px;
+    padding: 20px;
+    resize: none;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    outline: none;
+    font-size: 18px;
+    font-family: Arial;
+}
+
+textarea:focus {
+    border-color: #667eea;
+}
+
+body.dark textarea {
+    background: #0f172a;
+    color: white;
+    border-color: #475569;
+}
+
+/* ================= BUTTONS ================= */
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.main-btn {
+    flex: 1;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.start-btn {
+    background: #667eea;
+    color: white;
+}
+
+.restart-btn {
+    background: #eee;
+    color: #333;
+}
+
+body.dark .restart-btn {
+    background: #475569;
+    color: white;
+}
+
+/* ================= RESULT ================= */
+
+.result {
+    display: none;
+    margin-top: 25px;
+    padding: 25px;
+    border-radius: 15px;
+    background: #f5f6ff;
+    text-align: center;
+}
+
+body.dark .result {
+    background: #334155;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.result-card {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+}
+
+body.dark .result-card {
+    background: #1e293b;
+}
+
+.result-card h3 {
+    font-size: 13px;
+    color: #777;
+}
+
+.result-card p {
+    margin-top: 8px;
+    color: #667eea;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.message {
+    margin-top: 20px;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+/* ================= HISTORY ================= */
+
+.history {
+    margin-top: 30px;
+}
+
+.history h2 {
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+body.dark table {
+    background: #334155;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+body.dark th,
+body.dark td {
+    border-color: #475569;
+}
+
+th {
+    background: #667eea;
+    color: white;
+}
+
+.no-history {
+    padding: 20px;
+    text-align: center;
+    color: #777;
+}
+
+/* ================= LOGOUT ================= */
+
+.logout {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:700px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .header h1 {
+        font-size: 23px;
+    }
+
+    .levels {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .stats {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .result-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .sentence-box {
+        font-size: 18px;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .user-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .history {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 600px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOGIN SCREEN
+===================================================== -->
+
+<div class="login-screen" id="loginScreen">
+
+    <div class="login-box">
+
+        <div class="login-logo">
+            ⌨️
+        </div>
+
+        <h1>Typing Master</h1>
+
+        <p>
+            Improve your typing speed step by step
+        </p>
+
+
+        <div class="input-group">
+
+            <label>Your Name</label>
+
+            <input
+                type="text"
+                id="nameInput"
+                placeholder="Enter your name">
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                id="passwordInput"
+                placeholder="Create a password">
+
+        </div>
+
+
+        <button
+            class="login-btn"
+            onclick="login()">
+
+            🚀 LOGIN / CREATE ACCOUNT
+
+        </button>
+
+
+        <div
+            class="login-message"
+            id="loginMessage">
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MAIN APPLICATION
+===================================================== -->
+
+<div
+    class="main-screen"
+    id="mainScreen">
+
+    <div class="container">
+
+        <div class="card">
+
+
+            <!-- HEADER -->
+
+            <div class="header">
+
+                <div>
+
+                    <h1>
+                        ⌨️ Typing Master
+                    </h1>
+
+                    <p>
+                        Progressive Typing Speed Test
+                    </p>
+
+                </div>
+
+
+                <div class="header-buttons">
+
+                    <button
+                        class="icon-btn"
+                        onclick="toggleDarkMode()"
+                        id="themeButton">
+
+                        🌙
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- USER BAR -->
+
+            <div class="user-bar">
+
+                <div>
+
+                    👤 Welcome,
+                    <span
+                        class="username"
+                        id="displayUsername">
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="logout"
+                    onclick="logout()">
+
+                    Logout
+
+                </button>
+
+            </div>
+
+
+            <!-- LEVELS -->
+
+            <h3 class="level-title">
+                🎯 Select Level
+            </h3>
+
+
+            <div class="levels">
+
+                <button
+                    class="level-btn active"
+                    onclick="selectLevel(1,this)"
+                    id="level1">
+
+                    Level 1<br>
+                    <small>Easy</small>
+
+                </button>
+
+
+                <button
+                    class="level-btn"
+                    onclick="selectLevel(2,this)"
+                    id="level2">
+
+                    Level 2<br>
+                    <small>Basic</small>
+
+                </button>
+
+
+                <button
+                    class="level-btn"
+                    onclick="selectLevel(3,this)"
+                    id="level3">
+
+                    Level 3<br>
+                    <small>Medium</small>
+
+                </button>
+
+
+                <button
+                    class="level-btn"
+                    onclick="selectLevel(4,this)"
+                    id="level4">
+
+                    Level 4<br>
+                    <small>Hard</small>
+
+                </button>
+
+
+                <button
+                    class="level-btn"
+                    onclick="selectLevel(5,this)"
+                    id="level5">
+
+                    Level 5<br>
+                    <small>Expert</small>
+
+                </button>
+
+            </div>
+
+
+            <!-- STATS -->
+
+            <div class="stats">
+
+                <div class="stat">
+
+                    <h3>TIME</h3>
+
+                    <p id="timer">60</p>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <h3>WPM</h3>
+
+                    <p id="wpm">0</p>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <h3>ACCURACY</h3>
+
+                    <p id="accuracy">100%</p>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <h3>ERRORS</h3>
+
+                    <p id="errors">0</p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROGRESS -->
+
+            <div class="progress-container">
+
+                <div
+                    class="progress"
+                    id="progress">
+                </div>
+
+            </div>
+
+
+            <!-- SENTENCE -->
+
+            <div
+                class="sentence-box"
+                id="sentenceBox">
+            </div>
+
+
+            <!-- TYPING -->
+
+            <textarea
+                id="typingArea"
+                disabled
+                placeholder="Click START TEST and begin typing...">
+            </textarea>
+
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <button
+                    class="main-btn start-btn"
+                    id="startButton"
+                    onclick="startTest()">
+
+                    🚀 START TEST
+
+                </button>
+
+
+                <button
+                    class="main-btn restart-btn"
+                    onclick="restartTest()">
+
+                    🔄 NEW TEST
+
+                </button>
+
+            </div>
+
+
+            <!-- RESULT -->
+
+            <div
+                class="result"
+                id="result">
+
+                <h2>🏆 Test Result</h2>
+
+
+                <div class="result-grid">
+
+                    <div class="result-card">
+
+                        <h3>Level</h3>
+
+                        <p id="finalLevel">
+                            1
+                        </p>
+
+                    </div>
+
+
+                    <div class="result-card">
+
+                        <h3>WPM</h3>
+
+                        <p id="finalWpm">
+                            0
+                        </p>
+
+                    </div>
+
+
+                    <div class="result-card">
+
+                        <h3>Accuracy</h3>
+
+                        <p id="finalAccuracy">
+                            0%
+                        </p>
+
+                    </div>
+
+
+                    <div class="result-card">
+
+                        <h3>Errors</h3>
+
+                        <p id="finalErrors">
+                            0
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="message"
+                    id="message">
+                </div>
+
+            </div>
+
+
+            <!-- HISTORY -->
+
+            <div class="history">
+
+                <h2>
+                    📊 Your Score History
+                </h2>
+
+
+                <div id="historyTable">
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   SENTENCES
+===================================================== */
+
+
+/*
+    Level 1:
+    Short sentences
+*/
+
+const level1 = [
+
+    "python is easy to learn",
+
+    "practice makes perfect",
+
+    "learn python programming",
+
+    "sql is used for databases",
+
+    "coding improves problem solving",
+
+    "Python is a Programming Language",
+
+    "practice coding every day",
+
+    "learning makes you better",
+
+    "write clean Python code",
+
+    "focus and practice daily"
+
+];
+
+
+/*
+    Level 2:
+    Medium sentences
+*/
+
+const level2 = [
+
+    "Python is a powerful programming language",
+
+    "Tcs is a global Leader in IT Services and Trusted",
+
+    "Python is easy to learn with regular practice",
+
+    "SQL is widely used for managing databases",
+
+    "Coding improves problem solving and logical thinking",
+
+    "Practice every day to improve your typing speed",
+
+    "Learning Python can help you build many applications",
+
+    "Good programmers write simple and readable code",
+
+    "Communication skills are important for software developers",
+
+    "Regular practice helps freshers improve their technical skills"
+
+];
+
+
+/*
+    Level 3:
+    Longer sentences
+*/
+
+const level3 = [
+
+    "A digital Onboarding Program designed for newly recruited Freshers",
+
+    "It focuses on python java and Communication Skills",
+
+    "Python programming is useful for web development data science and automation",
+
+    "Learning SQL helps developers understand how applications store and retrieve data",
+
+    "A good software developer should understand programming databases and problem solving",
+
+    "Regular coding practice improves logical thinking debugging skills and programming confidence",
+
+    "Freshers should practice coding questions before attending technical interviews",
+
+    "Writing programs without built in methods can improve your understanding of programming logic",
+
+    "Python provides simple syntax powerful features and many useful libraries for developers",
+
+    "Developers should learn how to write efficient readable and maintainable programs"
+
+];
+
+
+/*
+    Level 4:
+    Hard sentences
+*/
+
+const level4 = [
+
+    "A successful software developer needs strong programming skills logical thinking database knowledge and good communication",
+
+    "Python is widely used in web development automation machine learning data science artificial intelligence and software testing",
+
+    "Understanding algorithms and data structures helps programmers solve complex problems efficiently and confidently",
+
+    "Preparing for technical interviews requires consistent practice with Python SQL object oriented programming and problem solving",
+
+    "Developers should understand how applications communicate with databases and how information is processed efficiently",
+
+    "Writing clean maintainable and reusable code is one of the most important skills for every professional programmer",
+
+    "A fresher can improve programming skills by solving coding problems regularly and building practical projects",
+
+    "Learning from programming mistakes is an important part of becoming a better software developer"
+
+];
+
+
+/*
+    Level 5:
+    Expert / longest sentences
+*/
+
+const level5 = [
+
+    "Becoming a professional software developer requires continuous learning strong programming fundamentals database knowledge problem solving ability communication skills and the discipline to practice coding every day",
+
+    "A good programmer does not simply write code but understands the problem carefully designs an efficient solution tests different possibilities identifies errors and improves the program until the expected result is achieved",
+
+    "Python programming combined with SQL database knowledge object oriented programming data structures algorithms and practical project experience can provide a strong foundation for a fresher preparing for software development interviews",
+
+    "Technical interviews often test a candidate's ability to understand requirements analyze problems write efficient programs explain their approach clearly and handle unexpected inputs without depending completely on built in functions",
+
+    "Regular practice with typing coding questions debugging exercises database queries and programming concepts can significantly improve confidence accuracy logical thinking and performance during technical interviews",
+
+    "Software development is a continuous learning process where programmers need to understand new technologies improve existing skills collaborate with team members communicate technical ideas clearly and create reliable solutions for real world problems"
+
+];
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let currentLevel = 1;
+
+let currentSentence = "";
+
+let startTime = null;
+
+let timerInterval = null;
+
+let testStarted = false;
+
+let testFinished = false;
+
+let timeLimit = 60;
+
+let currentUser = "";
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const loginScreen =
+    document.getElementById("loginScreen");
+
+const mainScreen =
+    document.getElementById("mainScreen");
+
+const typingArea =
+    document.getElementById("typingArea");
+
+const sentenceBox =
+    document.getElementById("sentenceBox");
+
+const timer =
+    document.getElementById("timer");
+
+const wpm =
+    document.getElementById("wpm");
+
+const accuracy =
+    document.getElementById("accuracy");
+
+const errors =
+    document.getElementById("errors");
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function login() {
+
+    let name =
+        document.getElementById("nameInput").value.trim();
+
+    let password =
+        document.getElementById("passwordInput").value;
+
+
+    if (name === "" || password === "") {
+
+        document.getElementById("loginMessage").innerText =
+            "Please enter your name and password.";
+
+        return;
+
+    }
+
+
+    /*
+        Simple local account system.
+
+        IMPORTANT:
+        This is browser-based storage,
+        not a real secure authentication system.
+    */
+
+    let users =
+        JSON.parse(
+            localStorage.getItem("typingUsers") || "{}"
+        );
+
+
+    /*
+        Create account if user doesn't exist
+    */
+
+    if (!users[name]) {
+
+        users[name] = {
+            password: password,
+            scores: [],
+            unlockedLevel: 1
+        };
+
+        localStorage.setItem(
+            "typingUsers",
+            JSON.stringify(users)
+        );
+
+    }
+
+    else {
+
+        /*
+            Existing account
+        */
+
+        if (users[name].password !== password) {
+
+            document.getElementById("loginMessage").innerText =
+                "Incorrect password.";
+
+            return;
+
+        }
+
+    }
+
+
+    currentUser = name;
+
+    localStorage.setItem(
+        "currentTypingUser",
+        name
+    );
+
+
+    showMainScreen();
+
+}
+
+
+/* =====================================================
+   SHOW MAIN SCREEN
+===================================================== */
+
+function showMainScreen() {
+
+    loginScreen.style.display = "none";
+
+    mainScreen.style.display = "block";
+
+
+    document.getElementById("displayUsername").innerText =
+        currentUser;
+
+
+    loadUserLevels();
+
+    restartTest();
+
+    displayHistory();
+
+}
+
+
+/* =====================================================
+   CHECK PREVIOUS LOGIN
+===================================================== */
+
+function checkLogin() {
+
+    let savedUser =
+        localStorage.getItem("currentTypingUser");
+
+
+    if (savedUser) {
+
+        currentUser = savedUser;
+
+        showMainScreen();
+
+    }
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout() {
+
+    localStorage.removeItem(
+        "currentTypingUser"
+    );
+
+
+    clearInterval(timerInterval);
+
+    location.reload();
+
+}
+
+
+/* =====================================================
+   GET SENTENCE LIST
+===================================================== */
+
+function getLevelSentences(level) {
+
+    if (level === 1) {
+        return level1;
+    }
+
+    if (level === 2) {
+        return level2;
+    }
+
+    if (level === 3) {
+        return level3;
+    }
+
+    if (level === 4) {
+        return level4;
+    }
+
+    return level5;
+
+}
+
+
+/* =====================================================
+   RANDOM SENTENCE
+===================================================== */
+
+function getRandomSentence() {
+
+    let sentences =
+        getLevelSentences(currentLevel);
+
+
+    let index =
+        Math.floor(
+            Math.random() * sentences.length
+        );
+
+
+    currentSentence =
+        sentences[index];
+
+}
+
+
+/* =====================================================
+   DISPLAY SENTENCE
+===================================================== */
+
+function displaySentence() {
+
+    sentenceBox.innerHTML = "";
+
+
+    for (
+        let i = 0;
+        i < currentSentence.length;
+        i++
+    ) {
+
+        let span =
+            document.createElement("span");
+
+
+        span.innerText =
+            currentSentence[i];
+
+
+        span.className =
+            "char";
+
+
+        sentenceBox.appendChild(span);
+
+    }
+
+}
+
+
+/* =====================================================
+   LEVEL SELECTION
+===================================================== */
+
+function selectLevel(level, button) {
+
+    if (testStarted) {
+
+        alert(
+            "Finish the current test before changing level."
+        );
+
+        return;
+
+    }
+
+
+    let users =
+        JSON.parse(
+            localStorage.getItem("typingUsers") || "{}"
+        );
+
+
+    let user =
+        users[currentUser];
+
+
+    /*
+        Level locking.
+
+        User must complete previous level
+        before moving to next level.
+    */
+
+    if (level > user.unlockedLevel) {
+
+        alert(
+            "🔒 Complete the previous level first."
+        );
+
+        return;
+
+    }
+
+
+    currentLevel = level;
+
+
+    document
+        .querySelectorAll(".level-btn")
+        .forEach(function(btn) {
+
+            btn.classList.remove("active");
+
+        });
+
+
+    button.classList.add("active");
+
+
+    restartTest();
+
+}
+
+
+/* =====================================================
+   LOAD LEVELS
+===================================================== */
+
+function loadUserLevels() {
+
+    let users =
+        JSON.parse(
+            localStorage.getItem("typingUsers") || "{}"
+        );
+
+
+    let user =
+        users[currentUser];
+
+
+    for (
+        let i = 1;
+        i <= 5;
+        i++
+    ) {
+
+        let btn =
+            document.getElementById(
+                "level" + i
+            );
+
+
+        if (i <= user.unlockedLevel) {
+
+            btn.classList.remove("locked");
+
+            btn.innerHTML =
+                "Level " + i +
+                "<br>" +
+                "<small>" +
+                getLevelName(i) +
+                "</small>";
+
+        }
+
+        else {
+
+            btn.classList.add("locked");
+
+            btn.innerHTML =
+                "🔒 Level " + i +
+                "<br>" +
+                "<small>Locked</small>";
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   LEVEL NAMES
+===================================================== */
+
+function getLevelName(level) {
+
+    if (level === 1)
+        return "Easy";
+
+    if (level === 2)
+        return "Basic";
+
+    if (level === 3)
+        return "Medium";
+
+    if (level === 4)
+        return "Hard";
+
+    return "Expert";
+
+}
+
+
+/* =====================================================
+   START TEST
+===================================================== */
+
+function startTest() {
+
+    if (testStarted) {
+        return;
+    }
+
+
+    testStarted = true;
+
+    testFinished = false;
+
+
+    startTime =
+        new Date();
+
+
+    typingArea.disabled =
+        false;
+
+
+    typingArea.value =
+        "";
+
+
+    typingArea.focus();
+
+
+    document.getElementById("startButton").innerText =
+        "⌨️ TEST IN PROGRESS";
+
+
+    document.getElementById("result").style.display =
+        "none";
+
+
+    timerInterval =
+        setInterval(
+            updateTest,
+            1000
+        );
+
+}
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+function updateTest() {
+
+    let now =
+        new Date();
+
+
+    let elapsed =
+        (now - startTime) / 1000;
+
+
+    let remaining =
+        Math.max(
+            0,
+            timeLimit - Math.floor(elapsed)
+        );
+
+
+    timer.innerText =
+        remaining;
+
+
+    let percentage =
+        (elapsed / timeLimit) * 100;
+
+
+    document.getElementById("progress").style.width =
+        Math.min(100, percentage) + "%";
+
+
+    calculateLiveStats();
+
+
+    /*
+        Stop at time limit
+    */
+
+    if (elapsed >= timeLimit) {
+
+        finishTest();
+
+    }
+
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+typingArea.addEventListener(
+    "input",
+    function() {
+
+        if (!testStarted) {
+            return;
+        }
+
+
+        updateCharacterColors();
+
+        calculateLiveStats();
+
+
+        /*
+            If sentence is completed,
+            automatically finish.
+        */
+
+        if (
+            typingArea.value === currentSentence
+        ) {
+
+            finishTest();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   CHARACTER COLORS
+===================================================== */
+
+function updateCharacterColors() {
+
+    let typed =
+        typingArea.value;
+
+
+    let chars =
+        sentenceBox.querySelectorAll(".char");
+
+
+    for (
+        let i = 0;
+        i < chars.length;
+        i++
+    ) {
+
+        chars[i].classList.remove(
+            "correct",
+            "wrong",
+            "current"
+        );
+
+
+        if (i < typed.length) {
+
+            if (
+                typed[i] === currentSentence[i]
+            ) {
+
+                chars[i].classList.add(
+                    "correct"
+                );
+
+            }
+
+            else {
+
+                chars[i].classList.add(
+                    "wrong"
+                );
+
+            }
+
+        }
+
+
+        if (i === typed.length) {
+
+            chars[i].classList.add(
+                "current"
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   LIVE STATS
+===================================================== */
+
+function calculateLiveStats() {
+
+    let typed =
+        typingArea.value;
+
+
+    let correct =
+        0;
+
+    let error =
+        0;
+
+
+    for (
+        let i = 0;
+        i < typed.length;
+        i++
+    ) {
+
+        if (
+            i < currentSentence.length &&
+            typed[i] === currentSentence[i]
+        ) {
+
+            correct++;
+
+        }
+
+        else {
+
+            error++;
+
+        }
+
+    }
+
+
+    errors.innerText =
+        error;
+
+
+    /*
+        Accuracy
+    */
+
+    let acc = 100;
+
+
+    if (typed.length > 0) {
+
+        acc =
+            (correct / typed.length) * 100;
+
+    }
+
+
+    accuracy.innerText =
+        acc.toFixed(1) + "%";
+
+
+    /*
+        WPM
+    */
+
+    if (startTime) {
+
+        let now =
+            new Date();
+
+
+        let seconds =
+            (now - startTime) / 1000;
+
+
+        if (seconds > 0) {
+
+            let words =
+                typed.length / 5;
+
+
+            let minutes =
+                seconds / 60;
+
+
+            let currentWpm =
+                words / minutes;
+
+
+            wpm.innerText =
+                Math.round(currentWpm);
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   FINISH TEST
+===================================================== */
+
+function finishTest() {
+
+    if (testFinished) {
+        return;
+    }
+
+
+    testFinished = true;
+
+    testStarted = false;
+
+
+    clearInterval(timerInterval);
+
+
+    typingArea.disabled =
+        true;
+
+
+    let typed =
+        typingArea.value;
+
+
+    let endTime =
+        new Date();
+
+
+    let elapsed =
+        (endTime - startTime) / 1000;
+
+
+    /*
+        Prevent division by zero
+    */
+
+    if (elapsed < 0.1) {
+        elapsed = 0.1;
+    }
+
+
+    /*
+        Calculate correct/error
+    */
+
+    let correct =
+        0;
+
+    let error =
+        0;
+
+
+    for (
+        let i = 0;
+        i < typed.length;
+        i++
+    ) {
+
+        if (
+            i < currentSentence.length &&
+            typed[i] === currentSentence[i]
+        ) {
+
+            correct++;
+
+        }
+
+        else {
+
+            error++;
+
+        }
+
+    }
+
+
+    /*
+        WPM
+    */
+
+    let words =
+        typed.length / 5;
+
+
+    let minutes =
+        elapsed / 60;
+
+
+    let finalWpm =
+        words / minutes;
+
+
+    /*
+        Accuracy
+    */
+
+    let finalAccuracy =
+        0;
+
+
+    if (typed.length > 0) {
+
+        finalAccuracy =
+            (correct / typed.length) * 100;
+
+    }
+
+
+    /*
+        Display
+    */
+
+    document.getElementById("finalLevel").innerText =
+        currentLevel;
+
+
+    document.getElementById("finalWpm").innerText =
+        Math.round(finalWpm) + " WPM";
+
+
+    document.getElementById("finalAccuracy").innerText =
+        finalAccuracy.toFixed(1) + "%";
+
+
+    document.getElementById("finalErrors").innerText =
+        error;
+
+
+    /*
+        Message
+    */
+
+    let message =
+        document.getElementById("message");
+
+
+    if (
+        typed === currentSentence
+    ) {
+
+        message.innerText =
+            "🎉 Perfect! Sentence completed!";
+
+    }
+
+    else if (
+        finalAccuracy >= 90
+    ) {
+
+        message.innerText =
+            "🔥 Excellent accuracy!";
+
+    }
+
+    else if (
+        finalAccuracy >= 75
+    ) {
+
+        message.innerText =
+            "👏 Good job! Keep practicing.";
+
+    }
+
+    else {
+
+        message.innerText =
+            "💪 Keep practicing and improve your accuracy.";
+
+    }
+
+
+    /*
+        Show result
+    */
+
+    document.getElementById("result").style.display =
+        "block";
+
+
+    /*
+        SAVE SCORE
+    */
+
+    saveScore(
+        finalWpm,
+        finalAccuracy,
+        error
+    );
+
+
+    /*
+        Unlock next level
+    */
+
+    unlockNextLevel(
+        finalAccuracy
+    );
+
+
+    document.getElementById("startButton").innerText =
+        "🚀 START TEST";
+
+}
+
+
+/* =====================================================
+   SAVE SCORE
+===================================================== */
+
+function saveScore(
+    finalWpm,
+    finalAccuracy,
+    error
+) {
+
+    let users =
+        JSON.parse(
+            localStorage.getItem("typingUsers") || "{}"
+        );
+
+
+    if (!users[currentUser]) {
+        return;
+    }
+
+
+    let score = {
+
+        level: currentLevel,
+
+        wpm: Math.round(finalWpm),
+
+        accuracy:
+            Number(finalAccuracy.toFixed(1)),
+
+        errors: error,
+
+        date:
+            new Date().toLocaleString()
+
+    };
+
+
+    users[currentUser].scores.push(
+        score
+    );
+
+
+    localStorage.setItem(
+        "typingUsers",
+        JSON.stringify(users)
+    );
+
+
+    displayHistory();
+
+}
+
+
+/* =====================================================
+   UNLOCK NEXT LEVEL
+===================================================== */
+
+function unlockNextLevel(
+    finalAccuracy
+) {
+
+    let users =
+        JSON.parse(
+            localStorage.getItem("typingUsers") || "{}"
+        );
+
+
+    let user =
+        users[currentUser];
+
+
+    /*
+        Requirement to unlock next level:
+
+        Accuracy >= 80%
+
+        Level 5 is the final level.
+    */
+
+    if (
+        finalAccuracy >= 80 &&
+        currentLevel < 5 &&
+        user.unlockedLevel <= currentLevel
+    ) {
+
+        user.unlockedLevel =
+            currentLevel + 1;
+
+
+        localStorage.setItem(
+            "typingUsers",
+            JSON.stringify(users)
+        );
+
+
+        loadUserLevels();
+
+
+        document.getElementById("message").innerText +=
+            " 🔓 Level " +
+            (currentLevel + 1) +
+            " unlocked!";
+
+    }
+
+}
+
+
+/* =====================================================
+   SCORE HISTORY
+===================================================== */
+
+function displayHistory() {
+
+    let users =
+        JSON.parse(
+            localStorage.getItem("typingUsers") || "{}"
+        );
+
+
+    let user =
+        users[currentUser];
+
+
+    if (
+        !user ||
+        user.scores.length === 0
+    ) {
+
+        document.getElementById("historyTable").innerHTML =
+
+            '<div class="no-history">' +
+            'No scores yet. Complete your first test!' +
+            '</div>';
+
+        return;
+
+    }
+
+
+    let html =
+
+        "<table>" +
+
+        "<tr>" +
+        "<th>Level</th>" +
+        "<th>WPM</th>" +
+        "<th>Accuracy</th>" +
+        "<th>Errors</th>" +
+        "<th>Date</th>" +
+        "</tr>";
+
+
+    /*
+        Display newest first
+    */
+
+    for (
+        let i = user.scores.length - 1;
+        i >= 0;
+        i--
+    ) {
+
+        let score =
+            user.scores[i];
+
+
+        html +=
+
+            "<tr>" +
+
+            "<td>Level " +
+            score.level +
+            "</td>" +
+
+            "<td>" +
+            score.wpm +
+            " WPM</td>" +
+
+            "<td>" +
+            score.accuracy +
+            "%</td>" +
+
+            "<td>" +
+            score.errors +
+            "</td>" +
+
+            "<td>" +
+            score.date +
+            "</td>" +
+
+            "</tr>";
+
+    }
+
+
+    html += "</table>";
+
+
+    document.getElementById("historyTable").innerHTML =
+        html;
+
+}
+
+
+/* =====================================================
+   RESTART
+===================================================== */
+
+function restartTest() {
+
+    clearInterval(timerInterval);
+
+
+    testStarted = false;
+
+    testFinished = false;
+
+    startTime = null;
+
+
+    timeLimit = 60;
+
+
+    timer.innerText =
+        timeLimit;
+
+
+    wpm.innerText =
+        "0";
+
+
+    accuracy.innerText =
+        "100%";
+
+
+    errors.innerText =
+        "0";
+
+
+    document.getElementById("progress").style.width =
+        "0%";
+
+
+    typingArea.value =
+        "";
+
+
+    typingArea.disabled =
+        true;
+
+
+    document.getElementById("startButton").innerText =
+        "🚀 START TEST";
+
+
+    document.getElementById("result").style.display =
+        "none";
+
+
+    getRandomSentence();
+
+    displaySentence();
+
+}
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+function toggleDarkMode() {
+
+    document.body.classList.toggle("dark");
+
+
+    let dark =
+        document.body.classList.contains("dark");
+
+
+    localStorage.setItem(
+        "typingDarkMode",
+        dark
+    );
+
+
+    document.getElementById("themeButton").innerText =
+        dark ? "☀️" : "🌙";
+
+}
+
+
+/* =====================================================
+   LOAD DARK MODE
+===================================================== */
+
+function loadDarkMode() {
+
+    let dark =
+        localStorage.getItem(
+            "typingDarkMode"
+        );
+
+
+    if (dark === "true") {
+
+        document.body.classList.add("dark");
+
+        document.getElementById("themeButton").innerText =
+            "☀️";
+
+    }
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+loadDarkMode();
+
+checkLogin();
+
+
+</script>
+
+</body>
+
+</html>
+```
