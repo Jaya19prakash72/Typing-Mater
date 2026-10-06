@@ -3,6 +3,11 @@ TYPING MASTER - LOCAL HOST PROJECT
 
 This project is based on the uploaded Typing Master HTML application.
 
+Deployed Link 
+
+https://typingmst.netlify.app/  --live now
+
+
 REQUIREMENTS
 ------------
 - Windows 8.1 / Windows 10 / Windows 11
